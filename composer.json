@@ -1,0 +1,23 @@
+{
+  "name": "cvar1984/scat",
+  "description": "Simple Secure Socket Chatting",
+  "type": "library",
+  "require": {
+    "ext-openssl": "^7.4",
+    "ext-sockets": "^7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Cvar1984\\": "src/"
+    }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Cvar1984",
+      "role" : "Developer",
+      "email": "gedzsarjuncomuniti@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable"
+}
