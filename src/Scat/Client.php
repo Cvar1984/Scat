@@ -2,18 +2,17 @@
 
 namespace Cvar1984\Scat;
 
-final class Server implements ScatInterface
+final class Client implements ScatInterface
 {
     private string $method = 'aes-128-ctr';
     private string $key;
+    private string $iv;
 
     public function __construct(string $host, int $port)
     {
         $this->key = openssl_digest(php_uname(), 'SHA256', true);
         $this->socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-        socket_bind($this->socket, $host, $port);
-        socket_listen($this->socket);
-        $this->connection = socket_accept($this->socket);
+        socket_connect($this->socket, $host, $port);
     }
     protected function encryptMessage(string $token): string
     {
@@ -41,11 +40,10 @@ final class Server implements ScatInterface
     public function sendMessage(string $message): bool
     {
         $encrypted = $this->encryptMessage($message);
-        return socket_write($this->connection, $encrypted, strlen($encrypted));
+        return socket_write($this->socket, $encrypted, strlen($encrypted));
     }
     public function __destruct()
     {
-        socket_close($this->connection);
         socket_close($this->socket);
     }
 }
