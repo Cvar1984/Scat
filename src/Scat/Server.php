@@ -6,6 +6,7 @@ final class Server implements ScatInterface
 {
     private string $method = 'aes-128-ctr';
     private string $key;
+    private string $iv;
 
     public function __construct(string $host, int $port)
     {
